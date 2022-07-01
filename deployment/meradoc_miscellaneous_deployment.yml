@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meradoc-miscellaneous-deployment
+  namespace: NAMESPACE
+  labels:
+    app: meradoc-miscellaneous
+spec:
+  selector:
+      matchLabels:
+        app: meradoc-miscellaneous
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: meradoc-miscellaneous
+    spec:
+      securityContext:
+        runAsUser: 1000
+      containers:
+      - name: meradoc-miscellaneous
+        image: CONTAINER_IMAGE
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m" #NEED TO CHANGE BASED ON LOAD AND PERF TESTING
+          requests:
+            memory: "250Mi"
+            cpu: "200m" #NEED TO CHANGE BASED ON LOAD AND PERF TESTING
+        readinessProbe:
+            httpGet:
+              path: /v1/api/healthCheck
+              port: 2004 
+              scheme: HTTP
+            initialDelaySeconds: 200
+            timeoutSeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+        livenessProbe:
+            httpGet:
+              path: /v1/api/healthCheck #NEED TO CHANGE 
+              port: 2004
+              scheme: HTTP
+            initialDelaySeconds: 200
+            timeoutSeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+        ports:
+        - containerPort: 2004 
+        envFrom:
+        - configMapRef:
+            name: meradoc-miscellaneous-configmap

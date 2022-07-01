@@ -1,0 +1,70 @@
+pipeline {
+    agent any
+    stages {
+        stage("Env Variables") {
+            steps {
+
+                script {
+                    env.ECRREPOURI = "464233631740.dkr.ecr.ap-south-1.amazonaws.com/miscellaneous"
+                    env.DOCKERPUSHURL = "https:// 464233631740.dkr.ecr.ap-south-1.amazonaws.com/miscellaneous "
+                    env.FILENAME = "deployment/meradoc_miscellaneous_deployment.yml"
+                    sh "cd ${env.WORKSPACE}"
+          env.GIT_BRANCH_ORIGIN = "${sh(script:'git name-rev --name-only HEAD', returnStdout: true)}"
+          env.GIT_BRANCH = GIT_BRANCH_ORIGIN.substring(GIT_BRANCH_ORIGIN.lastIndexOf('/') + 1, GIT_BRANCH_ORIGIN.length())
+          env.COMMIT = sh(returnStdout: true, script: 'echo $(git rev-parse --short HEAD)').trim()
+          env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+          env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
+          env.TAG = ${env.GIT_BRANCH} + "-" + "${BUILD_NUMBER}"
+                    env.IMAGE = "${env.ECRREPOURI}" + ":" + "${env.TAG}"
+                } //script end           
+            } //steps end
+        } // env Variables stage end
+
+        stage("print Env Variables") {
+            steps {
+                echo "Repo url = ${env.ECRREPOURI}"  
+                echo "Repo tag = ${env.TAG}" 
+                echo "image = ${env.IMAGE}"          
+            } //steps end
+        } // print env Variables stage end
+
+        stage("Replacing Yaml Variables") {
+            steps {
+                sh """        
+                    sed -i "s|CONTAINER_IMAGE|${env.IMAGE}|g" ${env.FILENAME}
+          sed -i "s|NAMESPACE|${env.GIT_BRANCH}|g" ${env.FILENAME}
+                """
+            } //steps end
+        } //Replacing yaml Variables stage end
+        
+        stage("Docker build") {
+            steps {
+                sh """                                        
+                    docker build -t ${env.ECRREPOURI}:${env.TAG} .
+                """
+            } // steps end
+        } // docker build stage end
+
+        stage("Docker push to AWS ECR") {
+            steps
+              {
+                script
+                 {
+                     sh("eval \$(aws2 ecr get-login --no-include-email)")
+                     docker.withRegistry("${env.DOCKERPUSHURL}", "ecr:ap-south-1:aws-creds") {
+                     docker.image("${env.IMAGE}").push()
+                    } //docker withRegistry end
+                } //script end
+            } // steps end
+        } //  docker push stage end
+
+
+        stage("k8S file deployment") {
+            steps {
+               withKubeConfig(caCertificate: '', clusterName: 'meradoc-production', contextName: '', credentialsId: 'kubernetes-service-account-prod', namespace: '', serverUrl: '') {
+                   sh "kubectl apply -f ${env.FILENAME}"
+                }  // withKubeConfig end 
+            } // steps end
+        } //  k8S deployment file deployment stage end
+    } //stages end
+} //pipeline end

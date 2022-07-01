@@ -1,0 +1,387 @@
+<head>
+  <title>Mera doc</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta
+    name="viewport"
+    content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;"
+  />
+  <meta name="description" content="Mera doc" />
+  <meta name="keywords" content="Mera doc" />
+
+  <meta name="author" content="Mera doc" />
+
+  <meta property="og:type" content="website" />
+  <meta name="og_site_name" property="og:site_name" content="Mr Med" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato&family=Poppins"
+    rel="stylesheet"
+  />
+</head>
+
+<body style="margin: 0px; padding: 0px">
+  <div style="height: 100%">
+    <table width="100%" style="border-collapse: collapse">
+      <thead>
+        <tr>
+          <th scope="row"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background: #ededed">
+          <td
+            style="
+              background: white;
+              width: 90%;
+              margin: 40px auto;
+              border-radius: 5px;
+              display: flex;
+              justify-content: center;
+              margin-top: 10px;
+            "
+          >
+            <div style="padding: 30px 100px; width: 100%">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  padding-bottom: 20px;
+                "
+              >
+                <div
+                  style="
+                    font-family: Lato;
+                    font-style: normal;
+                    font-weight: 900;
+                    font-size: 43px;
+                    line-height: 159.6%;
+                    display: flex;
+                    align-items: center;
+
+                    color: #243d63;
+                  "
+                >
+                  Consultation Invoice
+                </div>
+                <div style="text-align: end">
+                  <img
+                    src="https://yt3.ggpht.com/fdp3CYxaMtixBQhY5HhfhHvOOPvOvVbWb2DmkyOH2bbn6vJWMAbhZSJE_Yd5vQxkrSNWLM8mIDM=s900-c-k-c0x00ffffff-no-rj"
+                    alt="meradoclogo"
+                    style="padding-top: 24px;
+                    height: 150px;
+                    width: 150px;"
+                  />
+                </div>
+              </div>
+
+              <div
+                style="
+                  padding-bottom: 20px;
+                  font-family: Poppins;
+                  font-style: normal;
+                  font-weight: normal;
+                  font-size: 24px;
+                  line-height: 36px;
+                  color: #000000;
+                "
+              >
+                Doctor Details
+              </div>
+
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  padding-bottom: 25px;
+                "
+              >
+                <div style="display: flex">
+                  <img src="./doctorprofile.png" style="border-radius: 182px" />
+                  <div style="padding: 10px">
+                    <span
+                      style="
+                        font-weight: 600;
+                        font-size: 20px;
+
+                        line-height: 30px;
+                        font-family: Poppins;
+                        color: #4f4f4f;
+                      "
+                    >
+                      {{ appointmentDetails.doctorName}}
+                      <span
+                        style="
+                          font-style: normal;
+                          font-weight: normal;
+                          font-size: 18px;
+                          line-height: 27px;
+
+                          color: #343434;
+                        "
+                      >
+                        assigned for your consultation.</span
+                      >
+                    </span>
+                    <br />
+                    <span
+                      style="
+                        font-weight: 600;
+                        font-size: 20px;
+                        line-height: 30px;
+                        font-family: Poppins;
+                        color: #4f4f4f;
+                      "
+                    >
+                      Appointment ID : {{ appointmentDetails.appointmentId}}
+                    </span>
+                  </div>
+                </div>
+                <div style="padding: 10px">
+                  <span
+                    style="
+                      padding-left: 45px;
+                      font-weight: 600;
+                      font-size: 20px;
+                      text-align: end;
+                      line-height: 30px;
+                      font-family: Poppins;
+                      color: #4f4f4f;
+                    "
+                  >
+                    Invoice No : {{appointmentDetails.invoiceId}}
+                  </span>
+                  <br />
+                  <span
+                    style="
+                      font-weight: 600;
+                      font-size: 20px;
+                      line-height: 30px;
+                      font-family: Poppins;
+                      color: #4f4f4f;
+                    "
+                  >
+                    GST : ABDCDSDG1235468
+                  </span>
+                </div>
+              </div>
+
+              <div
+                style="
+                  padding-bottom: 10px;
+                  font-family: Poppins;
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 20px;
+                  line-height: 30px;
+                  color: #4f4f4f;
+                "
+              >
+                Appointment Date and Time
+              </div>
+              <div
+                style="
+                  font-family: Poppins;
+                  font-style: normal;
+                  font-weight: 600;
+                  font-size: 23px;
+                  line-height: 34px;
+                  color: #243d63;
+                "
+              >
+                {{ appointmentDetails.appointmentDate}}, {{appointmentDetails.appointmentStartTime}} - {{appointmentDetails.appointmentEndTime}}
+              </div>
+
+              <div>
+                <table
+                  style="
+                    background: #ffffff;
+                    border: 1px solid #d3d3d3;
+                    box-sizing: border-box;
+                    border-radius: 8px;
+                    width: 100%;
+                    margin: 3% 0px;
+                  "
+                >
+                  <thead>
+                    <tr>
+                      <th
+                        colspan="2"
+                        style="
+                          text-align: left;
+                          padding: 10px;
+                          font-family: Poppins;
+                          font-style: normal;
+                          font-weight: normal;
+                          font-size: 24px;
+                          line-height: 36px;
+                          color: #000000;
+                          border-bottom: 1px solid #d3d3d3;
+                        "
+                      >
+                        Order Details
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      style="
+                        font-family: Poppins;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 18px;
+                        line-height: 27px;
+                        /* identical to box height */
+
+                        color: #343434;
+                      "
+                    >
+                      <td style="width: 90%; padding: 10px">
+                        Consultation Charges
+                      </td>
+                      <td style="text-align: end; padding: 0px 15px">₹ {{ appointmentDetails.consultationCharges}}</td>
+                    </tr>
+                    <tr
+                      style="
+                        font-family: Poppins;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 18px;
+                        line-height: 27px;
+                        /* identical to box height */
+
+                        color: #343434;
+                      "
+                    >
+                      <td style="width: 90%; padding: 10px">Booking Charges</td>
+                      <td style="text-align: end; padding: 0px 15px">₹ {{ appointmentDetails.bookingCharges}}</td>
+                    </tr>
+                    <tr
+                      style="
+                        font-family: Poppins;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 18px;
+                        line-height: 27px;
+                        /* identical to box height */
+
+                        color: #343434;
+                      "
+                    >
+                      <td style="width: 90%; padding: 10px">Tax</td>
+                      <td style="text-align: end; padding: 0px 15px">₹ {{ appointmentDetails.tax}}</td>
+                    </tr>
+                    <tr
+                      style="
+                        font-family: Poppins;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 18px;
+                        line-height: 27px;
+
+                        color: #343434;
+                      "
+                    >
+                      <td
+                        colspan="2"
+                        style="
+                          width: 90%;
+                          padding: 10px;
+                          border-top: 1px solid #d3d3d3;
+                        "
+                      >
+                        <div
+                          style="
+                            display: flex;
+                            justify-content: space-between;
+                            margin-right: 5px;
+                          "
+                        >
+                          <div>Total Amount</div>
+                          <div>
+                            <span
+                              style="
+                                font-family: Poppins;
+                                font-style: normal;
+                                font-weight: 600;
+                                font-size: 18px;
+                                line-height: 27px;
+
+                                color: #706a6a;
+                              "
+                              >₹ {{ appointmentDetails.totalCharges}}</span
+                            >
+                            {{!-- <span
+                              style="
+                                font-family: Poppins;
+                                font-style: normal;
+                                font-weight: bold;
+                                font-size: 18px;
+                                line-height: 27px;
+                                /* identical to box height */
+
+                                color: #000000;
+                              "
+                              >₹ {{ appointmentDetails.totalCharges}}
+                            </span> --}}
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div
+                style="
+                  padding-bottom: 20px;
+                  font-family: Poppins;
+                  font-style: normal;
+                  font-weight: normal;
+                  font-size: 24px;
+                  line-height: 36px;
+                  color: #000000;
+                "
+              >
+                Patient Details
+              </div>
+
+              <div style="display: flex">
+                <img src="`${{ appointmentDetails.profileUrl}}`" style="border-radius: 76px" />
+                <div style="padding: 10px 20px">
+                  <span
+                    style="
+                      font-family: Poppins;
+                      font-style: normal;
+                      font-weight: 500;
+                      font-size: 24px;
+
+                      color: #545454;
+                    "
+                  >
+                    {{ appointmentDetails.patientName}}
+                  </span>
+
+                  <br />
+                  <span
+                    style="
+                      font-family: Poppins;
+                      font-style: normal;
+                      font-weight: normal;
+                      font-size: 14px;
+                      line-height: 21px;
+
+                      color: #0e69c2;
+                    "
+                  >
+                    ID Number : {{ appointmentDetails.patientDisplayId}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
